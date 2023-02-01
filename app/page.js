@@ -3,6 +3,7 @@ import { Inter } from '@next/font/google'
 import styles from './page.module.css'
 import Navbar from '@/components/navbar/navbar';
 import Sidebar from '@/components/sidebar/sidebar';
+import LuckyPick from './lucky_pick';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,12 +13,7 @@ export default function Home() {
       <Navbar />
       <div className="flex flex-row min-h-screen">
         <Sidebar />
-        <div className="basis-4/5 bg-[#ECECEC]">
-          <h1 className="justify-center">LUCKY PICK</h1>
-          <div>
-
-          </div>
-        </div>
+        <LuckyPick />
       </div>
     </div>
   )
