@@ -1,6 +1,14 @@
+
 import styles from "./sidebar.module.css";
+//import React, {useState} from "react";
 
 export default function Sidebar() {
+    // const [game, setGame] = useState('');
+    // const [betCount, setBetCount] = useState(1);
+    
+    // function pickAgain() {
+
+    // }
     return (
         <div className="flex flex-col basis-1/5 justify-start p-8 bg-[#FFC300]">
             <div className="flex flex-col mb-8">
@@ -17,15 +25,15 @@ export default function Sidebar() {
                 </div>
 
                 <div className="flex flex-col my-4">
-                    <label htmlFor="gamesNumber" className="mb-1 text-sm font-medium text-gray-800">Enter number of lucky pick/s:</label>
-                    <input id="gamesNumber" type="number" min="1" max="10" placeholder="Number of games" className="bg-gray-100 border border-gray-300 text-gray-800 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 shadow" ></input>
+                    <label htmlFor="betNumber" className="mb-1 text-sm font-medium text-gray-800">Enter number of lucky pick/s:</label>
+                    <input id="betNumber" type="number" min="1" max="10" placeholder="Number of bets" className="bg-gray-100 border border-gray-300 text-gray-800 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 shadow" ></input>
                 </div>
             </div>
             <div className="flex flex-col gap-4 my-auto">
-                <button type="button" className="bg-gray-100 hover:bg-[#FF1818] hover:text-[#ECECEC] text-gray-800 font-bold py-2 px-4 rounded shadow items-center">
+                <button type="button" className="bg-gray-100 hover:bg-[#ff4d4d] hover:text-[#ECECEC] text-gray-800 font-bold py-2 px-4 rounded shadow items-center">
                     Pick Again
                 </button> 
-                <button type="button" className="bg-gray-100 hover:bg-[#FF1818] hover:text-[#ECECEC] text-gray-800 font-bold py-2 px-4 rounded shadow items-center">
+                <button type="button" className="bg-gray-100 hover:bg-[#ff4d4d] hover:text-[#ECECEC] text-gray-800 font-bold py-2 px-4 rounded shadow items-center">
                     Save
                 </button>
             </div>
