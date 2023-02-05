@@ -2,13 +2,14 @@
 export default function Randomizer() {
     const randomNumbers = [];
     
-    while (randomNumbers.length <= 6) {
+    while (randomNumbers.length < 6) {
         const randomNumber = Math.floor(Math.random()*45) + 1;
         //check if number is unique
         if (!randomNumbers.includes(randomNumber)) {
             randomNumbers.push(randomNumber);
         } 
     }
+    console.log(randomNumbers);
     return randomNumbers.sort(function(a, b) {
         return a - b;
       });

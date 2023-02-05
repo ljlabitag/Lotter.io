@@ -1,21 +1,29 @@
+"use client";
 
 import styles from "./sidebar.module.css";
-//import React, {useState} from "react";
+import React, {useState} from "react";
+import NumberGenerator from "../lucky_pick_generator/number_generator";
+import LuckyPick from "@/app/lucky_pick/page";
 
 export default function Sidebar() {
-    // const [game, setGame] = useState('');
-    // const [betCount, setBetCount] = useState(1);
+    const [game, setGame] = useState('Choose a lotto game');
+    const [betCount, setBetCount] = useState(1);
     
-    // function pickAgain() {
-
-    // }
+    function pickAgain() {
+        const betRows = "<div id='betDiv'><NumberGenerator game={game}betCount={betCount}/></div>"
+        const betDiv = document.getElementById("betDiv");
+        betDiv.replaceWith("<div id='betDiv'>a</div>");    
+        console.log(betRows);
+        // parentDiv.replaceChild(betRows, betDiv);
+    }
     return (
         <div className="flex flex-col basis-1/5 justify-start p-8 bg-[#FFC300]">
             <div className="flex flex-col mb-8">
                 <div className="flex flex-col mb-4">
                     <label htmlFor="game" className="mb-1 text-sm font-medium text-gray-800">Select a lotto game</label>
-                    <select id="game" className="bg-gray-100 border border-gray-300 text-gray-800 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 shadow">
-                        <option selected>Choose a lotto game</option>
+                    <select value={game} onChange={(e)=>{setGame(e.target.value)}} id="game"
+                    className="bg-gray-100 border border-gray-300 text-gray-800 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 shadow">
+                        <option>Choose a lotto game</option>
                         <option value="42">Lotto 6/42</option>
                         <option value="45">Megalotto 6/45</option>
                         <option value="49">Superlotto 6/49</option>
@@ -26,11 +34,12 @@ export default function Sidebar() {
 
                 <div className="flex flex-col my-4">
                     <label htmlFor="betNumber" className="mb-1 text-sm font-medium text-gray-800">Enter number of lucky pick/s:</label>
-                    <input id="betNumber" type="number" min="1" max="10" placeholder="Number of bets" className="bg-gray-100 border border-gray-300 text-gray-800 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 shadow" ></input>
+                    <input value={betCount} onChange={(e)=>{setBetCount(e.target.value)}} id="betNumber" type="number" min="1" max="10" placeholder="Number of bets" 
+                    className="bg-gray-100 border border-gray-300 text-gray-800 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 shadow" ></input>
                 </div>
             </div>
             <div className="flex flex-col gap-4 my-auto">
-                <button type="button" className="bg-gray-100 hover:bg-[#ff4d4d] hover:text-[#ECECEC] text-gray-800 font-bold py-2 px-4 rounded shadow items-center">
+                <button type="button" onClick={pickAgain} className="bg-gray-100 hover:bg-[#ff4d4d] hover:text-[#ECECEC] text-gray-800 font-bold py-2 px-4 rounded shadow items-center">
                     Pick Again
                 </button> 
                 <button type="button" className="bg-gray-100 hover:bg-[#ff4d4d] hover:text-[#ECECEC] text-gray-800 font-bold py-2 px-4 rounded shadow items-center">

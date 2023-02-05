@@ -1,14 +1,14 @@
 import NumberGenerator from "@/components/lucky_pick_generator/number_generator";
 
-export default function LuckyPick() {
+export default function LuckyPick(props) {
     return (
-            <div className="flex basis-4/5 bg-[#ECECEC]">
-                <div className="flex flex-col w-full justify-around content-center">
-                    <h1 className="text-6xl mt-12 mx-auto font-bold text-[#ff4d4d]">LUCKY PICK</h1>
-                    <p className="mt-4 mx-auto">Select a lotto game</p>
-                    <div className="flex flex-row h-[200px] p-8 justify-around mb-8">
+            <div className="flex basis-4/5 bg-cover bg-[url('/images/lottery-wooden-balls-background.jpg')] backdrop-opacity-20">
+                <div className="flex flex-col w-full justify-around content-center bg-[#ECECEC]/60 backdrop-brightness-[-65]">
+                    <h1 className="text-6xl mx-auto font-bold text-[#ff4d4d] ">Lucky Pick</h1>
+                    <p className="mx-auto">Select a lotto game</p>
+                    <div id="betDiv">
                         <NumberGenerator 
-                            gameNumber=""
+                        betCount="0"
                         />
                     </div>
                 </div>
