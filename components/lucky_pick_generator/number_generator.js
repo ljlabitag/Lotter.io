@@ -3,8 +3,10 @@ import Randomizer from "./random";
 export default function NumberGenerator(props) {
     const betsArray = [];
 
+    const upperLimit = props.game.slice(-2)
+
     for (let i=0; i < parseInt(props.betCount); i++) {
-        betsArray.push(Randomizer().map((number,index)=>{return(
+        betsArray.push(Randomizer(upperLimit).map((number,index)=>{return(
             <div key={index} className="flex w-[8%] h-[100%] border-8 rounded-lg text-2xl items-center justify-center font-bold border-solid bg-[#ECECEC] border-[#ff4d4d]">{number}</div>
         )}));
     }
