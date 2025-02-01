@@ -31,24 +31,55 @@ function formatDate(dateStr: string): string {
 }
 
 /**
- * Handles POST requests to fetch and parse lotto results.
- * 
- * @param {Request} request - The incoming request object.
- * @returns {Promise<NextResponse>} - The response containing the parsed lotto results.
- * 
- * The function expects a JSON payload with the following structure:
- * {
- *   "drawDate": "MM-DD-YYYY",
- *   "game": "LOTTO_GAME_NAME"
- * }
- * 
- * The function performs the following steps:
- * 1. Formats the draw date to "month-dd-yyyy".
- * 2. Builds the URL to fetch the lotto results.
- * 3. Fetches the HTML content from the URL.
- * 4. Uses regex to extract the relevant table containing the game results.
- * 5. Extracts the winning combination, jackpot prize, and number of winners from the table.
- * 6. Returns the extracted data in JSON format.
+ * @swagger
+ * /api/lotto/results-search:
+ *   post:
+ *     tags:
+ *       - Lotto
+ *     summary: Fetch and parse lotto results
+ *     description: Fetches lotto results for a given draw date and game, and returns the winning combination, jackpot prize, and number of winners.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               drawDate:
+ *                 type: string
+ *                 description: The draw date in MM-DD-YYYY format. This is the date for which the lotto results are being fetched.
+ *                 example: "01-31-2025"
+ *               game:
+ *                 type: string
+ *                 description: The name of the lotto game. This should be the specific game identifier, such as "6/55".
+ *                 example: "6/58"
+ *     responses:
+ *       200:
+ *         description: A successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     winningCombination:
+ *                       type: string
+ *                       description: The winning combination
+ *                       example: "12-34-56-78-90"
+ *                     jackpotPrize:
+ *                       type: string
+ *                       description: The jackpot prize
+ *                       example: "Php 54,094,786.60"
+ *                     numberOfWinners:
+ *                       type: string
+ *                       description: The number of winners
+ *                       example: "3"
+ *       400:
+ *         description: Missing input(s). `drawDate` and `game` are required
+ *       404:
+ *         description: No results found
  */
 export async function POST(request: Request) {
     // Parse the JSON payload
@@ -69,7 +100,7 @@ export async function POST(request: Request) {
 
     // Fetch HTML content from the URL
     const response = await fetch(finalUrl);
-    // Turn repsonse to string and log to console
+    // Turn response to string and log to console
     const html = await response.text();
 
     // Get Regex Match
@@ -92,15 +123,7 @@ export async function POST(request: Request) {
 
     // If no match, return "No data found" response
     if (!winningCombinationMatch || !jackpotPrizeMatch || !numberOfWinnersMatch) {
-        return NextResponse.json(
-            { 
-                data: {
-                    winningCombination: "No data found",
-                    jackpotPrize: "No data found",
-                    numberOfWinners: "No data found"
-                }
-            }
-        );
+        return NextResponse.json({ error: "No results found." }, { status: 404 });
     }
     
     // Format the data
