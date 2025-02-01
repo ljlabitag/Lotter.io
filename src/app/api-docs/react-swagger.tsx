@@ -18,12 +18,10 @@ class ReactSwagger extends Component<Props, State> {
         this.state = {
             spec: props.spec,
         };
-        console.log('Initial spec in ReactSwagger:', props.spec);
     }
 
     componentDidUpdate(prevProps: Props) {
         if (this.props.spec !== prevProps.spec) {
-            console.log('Spec prop changed in ReactSwagger:', this.props.spec);
             // Update the state when the spec prop changes
             this.setState({ spec: this.props.spec });
         }
